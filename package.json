@@ -1,0 +1,31 @@
+{
+  "name": "travelncodeserver",
+  "version": "1.0.0",
+  "description": "server for Travel N Code App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devmason89/travelncodeserver.git"
+  },
+  "author": "Devon Mason",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devmason89/travelncodeserver/issues"
+  },
+  "homepage": "https://github.com/devmason89/travelncodeserver#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
