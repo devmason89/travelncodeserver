@@ -21,7 +21,7 @@ Office.create(officeFromRequest)
 })
 
 //*GETS ALL OFFICES FOR SPECIFIC TRAVELLER*//
-router.get('/getall', function (req, res) {
+router.get('/getall', validateSession, function (req, res) {
     let userid = req.user.id
 
     Office
@@ -39,7 +39,7 @@ router.get('/getall', function (req, res) {
 })
 
 //* GET A SINGLE OFFICE A SPECIFIC TRAVELLER*//
-router.get('/:id', function (req, res) {
+router.get('/:id', validateSession, function (req, res) {
     let data = req.params.id;
     let userid = req.user.id;
 
@@ -57,7 +57,7 @@ router.get('/:id', function (req, res) {
 })
 
 //*DELETES ITEM FOR INDIVIDUAL USER*//
-router.delete('/:id', function (req, res) {
+router.delete('/:id', validateSession, function (req, res) {
     let data = req.params.id;
     let userid = req.user.id;
 
@@ -76,16 +76,19 @@ router.delete('/:id', function (req, res) {
 
 //**UPDATE ITEM FOR INDIVIDUAL USER */
 router.put('/:id', validateSession, (req,res) => {
-    const updateOffice = {
-        name : req.body.office.name,
-        type : req.body.office.type,
-        freeWifi : req.body.office.freeWifi,
-        freeRestroom : req.body.office.freeRestroom,
-        comments : req.body.office.comments,
-        rating : req.body.office.rating,
-        owner : req.user.id 
-    }
-    Office.update(updateOffice, { where: {id : req.params.id}}       //is this referring to my id from my office table? connected to the user through owner? shouldn't I be using owner?
+    // const updateOffice = {
+        // name : req.body.office.name,
+        // type : req.body.office.type,
+        // freeWifi : req.body.office.freeWifi,
+        // freeRestroom : req.body.office.freeRestroom,
+        // comments : req.body.office.comments,
+        // rating : req.body.office.rating,
+        // owner : req.user.id 
+    // }
+    Office.update(req.body.office, { 
+        where: {
+            id : req.params.id,
+            owner: req.user.id}}       //only the person who made this office can update it now
     ).then(office => res.status(200).json(office))
     .catch(err => res.json(req.errors))
     
