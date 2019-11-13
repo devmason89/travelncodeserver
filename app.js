@@ -19,7 +19,7 @@ app.use(require('./middleware/validate-session'));
 app.use('/office', office);
 
 
-app.listen(3000, function() {
-    console.log("Travel N Code is listening on Port 3000.")
+app.listen(process.env.PORT, function() {
+    console.log(`Travel N Code is listening on Port ${process.env.PORT}.`)
 })
 
